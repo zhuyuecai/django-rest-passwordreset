@@ -30,18 +30,19 @@ def get_migrations_for_django_before_21():
             populate_auto_incrementing_pk_field,
             migrations.RunPython.noop
         ),
+          # remove primary key information from 'key' field
+        migrations.AlterField(
+            model_name='resetpasswordtoken',
+            name='key',
+            field=models.CharField(db_index=True, max_length=64, unique=True, verbose_name='Key'),
+        ),
         # add primary key information to id field
         migrations.AlterField(
             model_name='resetpasswordtoken',
             name='id',
             field=models.AutoField(primary_key=True, serialize=False)
         ),
-        # remove primary key information from 'key' field
-        migrations.AlterField(
-            model_name='resetpasswordtoken',
-            name='key',
-            field=models.CharField(db_index=True, max_length=64, unique=True, verbose_name='Key'),
-        ),
+      
     ]
 
 
